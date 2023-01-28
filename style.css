@@ -1,5 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@700&display=swap');
 
+body  {
+  background-image: url("images/blackjack_background.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
 button {
   background: rgb(212, 212, 212);
   border: 2px solid rgb(0, 0, 0);
