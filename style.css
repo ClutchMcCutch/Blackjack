@@ -12,6 +12,11 @@ button {
   font-size: 22px;
 }
 
+button:active {
+  box-shadow: 0 2px rgb(92, 92, 92);
+  transform: translateY(4px);
+}
+
 #hitbutton:hover {
   background-color: rgb(77, 173, 21);
 }
