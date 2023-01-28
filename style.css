@@ -1,14 +1,29 @@
-#game {
-    display: flex;
-  }
-  
-  #player-hand, #dealer-hand {
-    display: flex;
-    flex-wrap: wrap;
-  }
-  
-  .card {
-    width: 70px;
-    height: 100px;
-    border: 1px solid black;
-  }
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@700&display=swap');
+
+button {
+  background: rgb(212, 212, 212);
+  border: 2px solid rgb(0, 0, 0);
+  padding: 7px;
+  margin: 1px;
+  text-align: center;
+  display: inline-block;
+  border-radius: 15%;
+  font-family: 'EB Garamond', serif;
+  font-size: 22px;
+}
+
+#hitbutton:hover {
+  background-color: rgb(77, 173, 21);
+}
+
+#standbutton:hover {
+  background-color: rgb(243, 6, 6);
+}
+
+#doublebutton:hover {
+  background-color: rgb(0, 204, 255);
+}
+
+#splitbutton:hover {
+  background-color: rgb(255, 0, 242);
+}
