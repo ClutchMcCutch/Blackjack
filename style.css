@@ -1,5 +1,34 @@
-body  {
-    background-image: url("images/blackjack_background.png");
-    background-repeat: no-repeat;
-    background-size: cover;
-  }
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@700&display=swap');
+
+button {
+  background: rgb(212, 212, 212);
+  border: 2px solid rgb(0, 0, 0);
+  padding: 7px;
+  margin: 1px;
+  text-align: center;
+  display: inline-block;
+  border-radius: 15%;
+  font-family: 'EB Garamond', serif;
+  font-size: 22px;
+}
+
+button:active {
+  box-shadow: 0 2px rgb(92, 92, 92);
+  transform: translateY(4px);
+}
+
+#hitbutton:hover {
+  background-color: rgb(77, 173, 21);
+}
+
+#standbutton:hover {
+  background-color: rgb(243, 6, 6);
+}
+
+#doublebutton:hover {
+  background-color: rgb(0, 204, 255);
+}
+
+#splitbutton:hover {
+  background-color: rgb(255, 0, 242);
+}
