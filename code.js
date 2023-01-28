@@ -77,15 +77,38 @@ function startGame(){
 }
 
 action.hit = function(){
-    user.drawCard()
+    user.drawCard();
     if (user.value > 21){
         // lose
     } else if (user.value == 21){
         // win
     }
 }
-action.stand = function(){}
+action.stand = function(){
+    dealer.deck[1].hidden = false
+    dealer.value += dealer.hiddenValue
+    dealer.hiddenValue = 0
+    if (dealer.value > 21){
+        // win
+    } else if (dealer.value == 21){
+        // lose
+    }
+    while (dealer.value < 17){
+        dealer.drawCard();
+        if (dealer.value > 21){
+            // win
+        } else if (dealer.value == 21){
+            // lose
+        }
+    }
+    if (dealer.value > 21){
+        // win
+    } else if (dealer.value == 21){
+        // lose
+    }
+}
 action.dd = function(){}
+action.split = function(){}
 
 startGame();
 console.log(user, dealer)
