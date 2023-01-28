@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 @import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@700&display=swap');
 
 button {
@@ -33,10 +32,3 @@ button:active {
 #splitbutton:hover {
   background-color: rgb(255, 0, 242);
 }
-=======
-body  {
-    background-image: url("images/blackjack_background.png");
-    background-repeat: no-repeat;
-    background-size: cover;
-  }
->>>>>>> main
