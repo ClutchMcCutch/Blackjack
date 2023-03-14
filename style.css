@@ -36,3 +36,27 @@ button:active {
 #splitbutton:hover {
   background-color: rgb(255, 0, 242);
 }
+
+.card {
+  display: inline-block;
+  width: 100px;
+  height: 140px;
+  border: 1px solid black;
+  border-radius: 5px;
+  background-color: white;
+  position: relative;
+}
+
+.card_rank, .card_suit {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  font-size: 24px;
+}
+
+.card_suit {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 36px;
+}
