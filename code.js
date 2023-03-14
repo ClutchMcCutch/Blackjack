@@ -1,6 +1,8 @@
 let dealer = {deck:[], value:0, hiddenValue:0}
 let user = {deck:[], value:0}
 let action = {}; // storing functions in an object
+const suits = ["&#9824;", "&#9827;", "&#9829;", "&#9830;"];
+const ranks = ["A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"];
 
 user.drawCard = function(x){
     if (!x){x = 1}
