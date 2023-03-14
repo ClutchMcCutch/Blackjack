@@ -84,10 +84,6 @@ function startGame(bet){
 }
 
 action.hit = function(){
-<<<<<<< Updated upstream
-    user.drawCard()
-    if (user.value > 21){
-=======
     user.drawCard();
     user.checkWin();
 }
@@ -101,16 +97,11 @@ action.stand = function(){
         dealer.checkWin();
     }
     if (dealer.value > user.value){
->>>>>>> Stashed changes
         // lose
     } else if (user.value == 21){
         // win
     }
 }
-<<<<<<< Updated upstream
-action.stand = function(){}
-action.dd = function(){}
-=======
 action.dd = function(betvalue){
     betvalue *= 2;
     action.hit();
@@ -118,7 +109,6 @@ action.dd = function(betvalue){
 }
 
 action.split = function(){}
->>>>>>> Stashed changes
 
 startGame();
 console.log(dealer, user, action)
