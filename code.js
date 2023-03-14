@@ -1,5 +1,6 @@
 let dealer = {deck:[], value:0, hiddenValue:0}
 let user = {deck:[], value:0}
+let balance = 500;
 let action = {}; // storing functions in an object
 const suits = ["&#9824;", "&#9827;", "&#9829;", "&#9830;"];
 const ranks = ["A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"];
@@ -73,21 +74,51 @@ function randomCard(bool){
     return drawnCard;
 }
 
-function startGame(){
+function startGame(bet){
+    if (balance < bet){
+        console.log("Not enough money!");
+        return;
+    }
     dealer.drawCard(1,1);
     user.drawCard(2);
 }
 
 action.hit = function(){
+<<<<<<< Updated upstream
     user.drawCard()
     if (user.value > 21){
+=======
+    user.drawCard();
+    user.checkWin();
+}
+action.stand = function(){
+    dealer.value += dealer.hiddenValue;
+    dealer.hiddenValue = 0;
+    dealer.deck[1].hidden = false;
+    dealer.checkWin();
+    while (dealer.value < 17){
+        dealer.drawCard();
+        dealer.checkWin();
+    }
+    if (dealer.value > user.value){
+>>>>>>> Stashed changes
         // lose
     } else if (user.value == 21){
         // win
     }
 }
+<<<<<<< Updated upstream
 action.stand = function(){}
 action.dd = function(){}
+=======
+action.dd = function(betvalue){
+    betvalue *= 2;
+    action.hit();
+    action.stand();
+}
+
+action.split = function(){}
+>>>>>>> Stashed changes
 
 startGame();
-console.log(user, dealer)
+console.log(dealer, user, action)
