@@ -23,7 +23,6 @@ user.drawCard = function(x){
         user.deck.push(newCard);
     }
 }
-
 dealer.drawCard = function(cards, hiddenCards){
     if (!cards){cards = 1}
     if (!hiddenCards){hiddenCards = 0}
@@ -56,6 +55,21 @@ dealer.drawCard = function(cards, hiddenCards){
             dealer.hiddenValue += parseInt(newCard.value);
         }
         dealer.deck.push(newCard);
+    }
+}
+
+user.checkWin = function(){
+    if (user.value > 21){
+        // lose
+    } else if (user.value == 21){
+        // win
+    }
+}
+dealer.checkWin = function(){
+    if (dealer.value > 21){
+        // win
+    } else if (dealer.value == 21){
+        // lose
     }
 }
 
@@ -96,11 +110,6 @@ action.stand = function(){
         dealer.drawCard();
         dealer.checkWin();
     }
-    if (dealer.value > user.value){
-        // lose
-    } else if (user.value == 21){
-        // win
-    }
 }
 action.dd = function(betvalue){
     betvalue *= 2;
@@ -108,7 +117,6 @@ action.dd = function(betvalue){
     action.stand();
 }
 
-action.split = function(){}
 
 startGame();
 console.log(dealer, user, action)

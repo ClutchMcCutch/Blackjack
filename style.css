@@ -84,3 +84,7 @@ button:active {
 #balance-total:hover {
   background-color: #3E8E41;
 }
+
+.action{
+  visibility: hidden;
+}
