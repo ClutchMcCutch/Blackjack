@@ -1,5 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@700&display=swap');
-
+ body {
+  background-image: url("images/blackjack_background.png");
+  background-size: cover;
+  height: 100%;
+  width: 100%;
+ }
 button {
   background-color: #2ecc71;
   border: none;
@@ -17,7 +22,7 @@ button {
 }
 
 button:active {
-  box-shadow: 0 2px rgb(92, 92, 92);
+  box-shadow: 0 2px rgb(0, 0, 0);
   transform: translateY(4px);
 }
 
@@ -59,4 +64,23 @@ button:active {
   left: 50%;
   transform: translate(-50%, -50%);
   font-size: 36px;
+}
+
+#balance-total {
+  font-size: 32px;
+  font-weight: bold;
+  color: #fff;
+  background-color: #4CAF50;
+  padding: 16px;
+  border-radius: 4px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  transition: background-color 0.3s ease;
+  position: absolute;
+  top: 16px;
+  right: 16px;
+}
+
+#balance-total:hover {
+  background-color: #3E8E41;
 }
