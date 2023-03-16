@@ -127,5 +127,9 @@ action.dd = function(betvalue){
 }
 
 function updateCards(){
-
+    let template = document.querySelector('#template');
+    let clone = template.content.cloneNode(true);
+    console.log(clone.children[0])
 }
+
+updateCards();

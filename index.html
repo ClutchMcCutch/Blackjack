@@ -10,14 +10,14 @@
     <div id="balance-total">$500</div>
     <input id="betvalue" type="number" value="0">
     <button id="betbutton" type="button" onclick="startGame(parseInt(document.getElementById('betvalue').value))">Bet!</button>
-    <div class="card">
-      <div class="card_rank">4</div>
-      <div class="card_suit">&#9824;</div>
+    <div class="userdeck">
     </div>
-    <template>
+    <div class="dealerdeck">
+    </div>
+    <template id="template">
       <div class="card">
-        <div class="card_rank">4</div>
-        <div class="card_suit">&#9824;</div>
+        <div class="card_rank"></div>
+        <div class="card_suit"></div>
       </div>
     </template>
   </body>
