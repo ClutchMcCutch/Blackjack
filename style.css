@@ -42,6 +42,10 @@ button:active {
   background-color: rgb(255, 0, 242);
 }
 
+#betbutton {
+  visibility: visible;
+}
+
 .card {
   display: inline-block;
   width: 100px;

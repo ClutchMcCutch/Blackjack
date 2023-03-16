@@ -79,7 +79,7 @@ function random(min, max){
 
 function randomCard(bool){
     let values = ["A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"];
-    let types = ["S", "H", "D", "C"];
+    let types = ["S", "C", "H", "D"];
     if (!bool){
         bool = false;
     }
@@ -93,8 +93,17 @@ function startGame(bet){
         console.log("Not enough money!");
         return;
     }
+    let buttons = document.getElementsByClassName("action");
+    let button = document.getElementById('betbutton');
+    let input = document.getElementById('betvalue')
+    for (let i = 0; i < buttons.length; i++){
+        buttons[i].style.visibility = "visible";
+    }
+    button.style.visibility = "hidden";
+    input.style.visibility = "hidden";
     dealer.drawCard(1,1);
     user.drawCard(2);
+    console.log(user, dealer)
 }
 
 action.hit = function(){
@@ -117,6 +126,6 @@ action.dd = function(betvalue){
     action.stand();
 }
 
+function updateCards(){
 
-startGame();
-console.log(dealer, user, action)
+}
