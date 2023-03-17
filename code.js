@@ -2,25 +2,26 @@ let dealer = {deck:[], value:0, hiddenValue:0}
 let user = {deck:[], value:0}
 let balance = 500;
 let action = {}; // storing functions in an object
-const suits = ["&#9824;", "&#9827;", "&#9829;", "&#9830;"];
+const suits = ["\u2660", "\u2663", "\u2665", "\u2666"];
 const ranks = ["A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"];
 
 user.drawCard = function(x){
     if (!x){x = 1}
     for (let i = 0; i < x; i++){
         let newCard = randomCard();
-        if (newCard.value == "A"){
+        if (newCard[0].value == "A"){
             if (user.value + 11 > 21){
                 user.value += 1;
             } else {
                 user.value += 11;
             }
-        } else if (isNaN(parseInt(newCard.value)) === true){
+        } else if (isNaN(parseInt(newCard[0].value)) === true){
             user.value += 10;
         } else {
-            user.value += parseInt(newCard.value);
+            user.value += parseInt(newCard[0].value);
         }
-        user.deck.push(newCard);
+        user.deck.push(newCard[0]);
+        document.getElementById("userdeck").appendChild(newCard[1].children[0])
     }
 }
 dealer.drawCard = function(cards, hiddenCards){
@@ -28,33 +29,35 @@ dealer.drawCard = function(cards, hiddenCards){
     if (!hiddenCards){hiddenCards = 0}
     for (let i = 0; i < cards; i++){
         let newCard = randomCard();
-        if (newCard.value == "A"){
+        if (newCard[0].value == "A"){
             if (dealer.value + 11 > 21){
                 dealer.value += 1;
             } else {
                 dealer.value += 11;
             }
-        } else if (isNaN(parseInt(newCard.value)) === true){
+        } else if (isNaN(parseInt(newCard[0].value)) === true){
             dealer.value += 10;
         } else {
-            dealer.value += parseInt(newCard.value);
+            dealer.value += parseInt(newCard[0].value);
         }
-        dealer.deck.push(newCard);
+        dealer.deck.push(newCard[0]);
+        document.getElementById("dealerdeck").appendChild(newCard[1].children[0])
     }
     for (let i = 0; i < hiddenCards; i++){
         let newCard = randomCard(true);
-        if (newCard.value == "A"){
+        if (newCard[0].value == "A"){
             if (dealer.value + 11 > 21){
                 dealer.hiddenValue += 1;
             } else {
                 dealer.hiddenValue += 11;
             }
-        } else if (isNaN(parseInt(newCard.value)) === true){
+        } else if (isNaN(parseInt(newCard[0].value)) === true){
             dealer.hiddenValue += 10;
         } else {
-            dealer.hiddenValue += parseInt(newCard.value);
+            dealer.hiddenValue += parseInt(newCard[0].value);
         }
-        dealer.deck.push(newCard);
+        dealer.deck.push(newCard[0]);
+        document.getElementById("dealerdeck").appendChild(newCard[1].children[0])
     }
 }
 
@@ -79,13 +82,19 @@ function random(min, max){
 
 function randomCard(bool){
     let values = ["A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"];
-    let types = ["S", "C", "H", "D"];
+    let types = ["\u2660", "\u2663", "\u2665", "\u2666"];
+    let template = document.querySelector('#template');
+    let clone = template.content.cloneNode(true);
     if (!bool){
         bool = false;
     }
 
     let drawnCard = {value:values[random(0, values.length-1)], type:types[random(0, types.length-1)], hidden:bool};
-    return drawnCard;
+    let node = document.createTextNode(drawnCard.type);
+    clone.children[0].children[1].appendChild(node);
+    node = document.createTextNode(drawnCard.value)
+    clone.children[0].children[0].appendChild(node);
+    return [drawnCard, clone];
 }
 
 function startGame(bet){
@@ -126,10 +135,23 @@ action.dd = function(betvalue){
     action.stand();
 }
 
-function updateCards(){
-    let template = document.querySelector('#template');
-    let clone = template.content.cloneNode(true);
-    console.log(clone.children[0])
-}
+// function updateCards(user, dealer){
+//     if(!user || !dealer){console.log("Insufficient Parameters"); return;}
+//     let template = document.querySelector('#template');
+//     let clone = template.content.cloneNode(true);
+//     let cards = document.getElementsByClassName("card");
 
-updateCards();
+
+//     for (let i = 0; i < cards.length; i++){
+//         if (cards[i].id == ''){
+//             let node = document.createTextNode(suits[0]);
+//             clone.children[0].children[1].appendChild(node);
+//             node = document.createTextNode(ranks[0])
+//             clone.children[0].children[0].appendChild(node);
+//             document.getElementById("userdeck").appendChild(clone.children[0])
+            
+//         }
+//     }
+// }
+
+// updateCards();

@@ -4,15 +4,15 @@
     <link rel="stylesheet" href="style.css">
   </head>
   <body>
-    <button class="action" id="hitbutton" type="button" onclick="">Hit</button>
-    <button class="action" id="standbutton" type="button" onclick="">Stand</button>
-    <button class="action" id="doublebutton" type="button" onclick="">Double</button>
+    <button class="action" id="hitbutton" type="button" onclick="action.hit()">Hit</button>
+    <button class="action" id="standbutton" type="button" onclick="action.stand()">Stand</button>
+    <button class="action" id="doublebutton" type="button" onclick="action.dd()">Double</button>
     <div id="balance-total">$500</div>
     <input id="betvalue" type="number" value="0">
     <button id="betbutton" type="button" onclick="startGame(parseInt(document.getElementById('betvalue').value))">Bet!</button>
-    <div class="userdeck">
+    <div id="userdeck">
     </div>
-    <div class="dealerdeck">
+    <div id="dealerdeck">
     </div>
     <template id="template">
       <div class="card">
