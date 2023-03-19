@@ -63,16 +63,28 @@ dealer.drawCard = function(cards, hiddenCards){
 
 user.checkWin = function(){
     if (user.value > 21){
-        // lose
+        let buttons = document.getElementsByClassName("action")
+        for (let i = 0; i < buttons.length; i++){
+            buttons[i].style.visibility = hidden;
+        }
     } else if (user.value == 21){
-        // win
+        let buttons = document.getElementsByClassName("action")
+        for (let i = 0; i < buttons.length; i++){
+            buttons[i].style.visibility = hidden;
+        }
     }
 }
 dealer.checkWin = function(){
     if (dealer.value > 21){
-        // win
+        let buttons = document.getElementsByClassName("action")
+        for (let i = 0; i < buttons.length; i++){
+            buttons[i].style.visibility = hidden;
+        }
     } else if (dealer.value == 21){
-        // lose
+        let buttons = document.getElementsByClassName("action")
+        for (let i = 0; i < buttons.length; i++){
+            buttons[i].style.visibility = hidden;
+        }
     }
 }
 
@@ -134,24 +146,3 @@ action.dd = function(betvalue){
     action.hit();
     action.stand();
 }
-
-// function updateCards(user, dealer){
-//     if(!user || !dealer){console.log("Insufficient Parameters"); return;}
-//     let template = document.querySelector('#template');
-//     let clone = template.content.cloneNode(true);
-//     let cards = document.getElementsByClassName("card");
-
-
-//     for (let i = 0; i < cards.length; i++){
-//         if (cards[i].id == ''){
-//             let node = document.createTextNode(suits[0]);
-//             clone.children[0].children[1].appendChild(node);
-//             node = document.createTextNode(ranks[0])
-//             clone.children[0].children[0].appendChild(node);
-//             document.getElementById("userdeck").appendChild(clone.children[0])
-            
-//         }
-//     }
-// }
-
-// updateCards();
