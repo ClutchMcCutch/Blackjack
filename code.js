@@ -64,13 +64,15 @@ dealer.drawCard = function(cards, hiddenCards){
 user.checkWin = function(){
     if (user.value > 21){
         let buttons = document.getElementsByClassName("action")
+        let winText = document.querySelector("#playerHeader1")
         for (let i = 0; i < buttons.length; i++){
-            buttons[i].style.visibility = hidden;
+            buttons[i].style.visibility = "hidden";
         }
+        winText.style.display = "block";
     } else if (user.value == 21){
         let buttons = document.getElementsByClassName("action")
         for (let i = 0; i < buttons.length; i++){
-            buttons[i].style.visibility = hidden;
+            buttons[i].style.visibility = "hidden";
         }
     }
 }
@@ -78,12 +80,12 @@ dealer.checkWin = function(){
     if (dealer.value > 21){
         let buttons = document.getElementsByClassName("action")
         for (let i = 0; i < buttons.length; i++){
-            buttons[i].style.visibility = hidden;
+            buttons[i].style.visibility = "hidden";
         }
-    } else if (dealer.value == 21){
+    } else if (dealer.value < 21){
         let buttons = document.getElementsByClassName("action")
         for (let i = 0; i < buttons.length; i++){
-            buttons[i].style.visibility = hidden;
+            buttons[i].style.visibility = "hidden";
         }
     }
 }
