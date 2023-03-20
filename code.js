@@ -1,5 +1,5 @@
-let dealer = {deck:[], value:0, hiddenValue:0}
-let user = {deck:[], value:0}
+let dealer = {deck:[], value:0, hiddenValue:0};
+let user = {deck:[], value:0};
 let balance = 500;
 let action = {}; // storing functions in an object
 const suits = ["\u2660", "\u2663", "\u2665", "\u2666"];
@@ -7,7 +7,7 @@ const ranks = ["A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"]
 let betamount = 0;
 
 user.updateBalance = function(){
-    document.getElementById("balance-total").innerHTML = ''
+    document.getElementById("balance-total").innerHTML = '';
     let node = document.createTextNode(`$${balance}`);
     document.getElementById("balance-total").appendChild(node);
 }
@@ -29,7 +29,7 @@ user.drawCard = function(x){
             user.value += parseInt(newCard[0].value);
         }
         user.deck.push(newCard[0]);
-        document.getElementById("userdeck").appendChild(newCard[1].children[0])
+        document.getElementById("userdeck").appendChild(newCard[1].children[0]);
     }
 }
 dealer.drawCard = function(cards, hiddenCards){
@@ -49,7 +49,7 @@ dealer.drawCard = function(cards, hiddenCards){
             dealer.value += parseInt(newCard[0].value);
         }
         dealer.deck.push(newCard[0]);
-        document.getElementById("dealerdeck").appendChild(newCard[1].children[0])
+        document.getElementById("dealerdeck").appendChild(newCard[1].children[0]);
     }
     for (let i = 0; i < hiddenCards; i++){
         let newCard = randomCard(true);
@@ -65,47 +65,51 @@ dealer.drawCard = function(cards, hiddenCards){
             dealer.hiddenValue += parseInt(newCard[0].value);
         }
         dealer.deck.push(newCard[0]);
-        document.getElementById("dealerdeck").appendChild(newCard[1].children[0])
+        document.getElementById("dealerdeck").appendChild(newCard[1].children[0]);
     }
 }
 
 user.checkWin = function(){
     if (user.value > 21){
-        let buttons = document.getElementsByClassName("action")
-        let loseText = document.querySelector("#playerResult2")
+        let buttons = document.getElementsByClassName("action");
+        let loseText = document.querySelector("#playerResult2");
         for (let i = 0; i < buttons.length; i++){
             buttons[i].style.visibility = "hidden";
         }
         loseText.style.display = "block";
+        document.getElementById('betvalue').style.visibility = 'visible';
     } else if (user.value == 21){
-        let buttons = document.getElementsByClassName("action")
-        let winText = document.querySelector("#playerResult1")
+        let buttons = document.getElementsByClassName("action");
+        let winText = document.querySelector("#playerResult1");
         for (let i = 0; i < buttons.length; i++){
             buttons[i].style.visibility = "hidden";
         }
         winText.style.display = "block";
         balance += betamount*2;
         user.updateBalance();
+        document.getElementById('betvalue').style.visibility = 'visible';
     }
 }
 dealer.checkWin = function(){
     if (dealer.value > 21 || (dealer.value < user.value && dealer.value >= 17)){
-        let buttons = document.getElementsByClassName("action")
-        let winText = document.querySelector("#playerResult1")
+        let buttons = document.getElementsByClassName("action");
+        let winText = document.querySelector("#playerResult1");
         for (let i = 0; i < buttons.length; i++){
             buttons[i].style.visibility = "hidden";
         }
         winText.style.display = "block";
-        console.log(balance + betamount*2)
+        console.log(balance + betamount*2);
         balance += betamount*2;
         user.updateBalance();
+        document.getElementById('betvalue').style.visibility = 'visible';
     } else if (((dealer.value < 21 && dealer.value > 17) && dealer.value > user.value) || dealer.value == 21){
-        let buttons = document.getElementsByClassName("action")
-        let loseText = document.querySelector("#playerResult2")
+        let buttons = document.getElementsByClassName("action");
+        let loseText = document.querySelector("#playerResult2");
         for (let i = 0; i < buttons.length; i++){
             buttons[i].style.visibility = "hidden";
         }
         loseText.style.display = "block";
+        document.getElementById('betvalue').style.visibility = 'visible';
     }
 }
 
@@ -138,20 +142,22 @@ function startGame(bet){
         console.log("Not enough money!");
         return;
     }
-    betamount = bet
-    balance -= bet
+    betamount = bet;
+    balance -= bet;
     user.updateBalance();
+
     let buttons = document.getElementsByClassName("action");
     let button = document.getElementById('betbutton');
-    let input = document.getElementById('betvalue')
+    let input = document.getElementById('betvalue');
     for (let i = 0; i < buttons.length; i++){
         buttons[i].style.visibility = "visible";
     }
     button.style.visibility = "hidden";
     input.style.visibility = "hidden";
+
     dealer.drawCard(1,1);
     user.drawCard(2);
-    console.log(user, dealer)
+    console.log(user, dealer);
 }
 
 function restartGame(bet){
@@ -159,29 +165,35 @@ function restartGame(bet){
         console.log("Not enough money!");
         return;
     }
-    betamount = bet
-    balance -= bet
+    betamount = bet;
+    balance -= bet;
     user.updateBalance();
+
     let buttons = document.getElementsByClassName("action");
     let button = document.getElementById('betbutton');
-    let input = document.getElementById('betvalue')
+    let input = document.getElementById('betvalue');
+
     for (let i = 0; i < buttons.length; i++){
         buttons[i].style.visibility = "visible";
     }
     button.style.visibility = "hidden";
     input.style.visibility = "hidden";
+
     const userdeck = document.getElementById('userdeck');
     while (userdeck.firstChild) {
         userdeck.removeChild(userdeck.firstChild);
     }
+
     const dealerdeck = document.getElementById('dealerdeck');
     while (dealerdeck.firstChild) {
         dealerdeck.removeChild(dealerdeck.firstChild);
     }
-    let loseText = document.querySelector("#playerResult2")
+
+    let loseText = document.querySelector("#playerResult2");
     loseText.style.display = "none";
-    let winText = document.querySelector("#playerResult1")
+    let winText = document.querySelector("#playerResult1");
     winText.style.display = "none";
+
     user.value = 0;
     dealer.value = 0;
     user.deck = [];
@@ -189,7 +201,7 @@ function restartGame(bet){
     dealer.hiddenValue = 0;
     dealer.drawCard(1,1);
     user.drawCard(2);
-    console.log(user, dealer)
+    console.log(user, dealer);
 }
 
 action.hit = function(){
@@ -217,4 +229,5 @@ action.dd = function(betvalue){
     betamount = betvalue;
     action.hit();
     action.stand();
+    dealer.checkWin();
 }
