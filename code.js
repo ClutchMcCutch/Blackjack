@@ -64,29 +64,35 @@ dealer.drawCard = function(cards, hiddenCards){
 user.checkWin = function(){
     if (user.value > 21){
         let buttons = document.getElementsByClassName("action")
-        let winText = document.querySelector("#playerHeader1")
+        let loseText = document.querySelector("#playerResult2")
+        for (let i = 0; i < buttons.length; i++){
+            buttons[i].style.visibility = "hidden";
+        }
+        loseText.style.display = "block";
+    } else if (user.value == 21){
+        let buttons = document.getElementsByClassName("action")
+        let winText = document.querySelector("#playerResult1")
         for (let i = 0; i < buttons.length; i++){
             buttons[i].style.visibility = "hidden";
         }
         winText.style.display = "block";
-    } else if (user.value == 21){
-        let buttons = document.getElementsByClassName("action")
-        for (let i = 0; i < buttons.length; i++){
-            buttons[i].style.visibility = "hidden";
-        }
     }
 }
 dealer.checkWin = function(){
     if (dealer.value > 21){
         let buttons = document.getElementsByClassName("action")
+        let winText = document.querySelector("#playerResult1")
         for (let i = 0; i < buttons.length; i++){
             buttons[i].style.visibility = "hidden";
         }
-    } else if (dealer.value < 21){
+        winText.style.display = "block";
+    } else if (dealer.value < 21 && dealer.value > 17){
         let buttons = document.getElementsByClassName("action")
+        let loseText = document.querySelector("#playerResult2")
         for (let i = 0; i < buttons.length; i++){
             buttons[i].style.visibility = "hidden";
         }
+        loseText.style.display = "block";
     }
 }
 
@@ -108,6 +114,7 @@ function randomCard(bool){
     clone.children[0].children[1].appendChild(node);
     node = document.createTextNode(drawnCard.value)
     clone.children[0].children[0].appendChild(node);
+    console.log(clone.children[0])
     return [drawnCard, clone];
 }
 

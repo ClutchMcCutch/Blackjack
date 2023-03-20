@@ -56,6 +56,17 @@ button:active {
   position: relative;
 }
 
+.back {
+  display: none;
+  width: 100px;
+  height: 140px;
+  border: 1px solid black;
+  border-radius: 5px;
+  background-image: url('https://media.discordapp.net/attachments/901167623595769897/1087177400888070234/goldback_a17dec99-72da-4a44-a1df-9352fb3c8afa_1024x.png?width=285&height=401');
+  background-size: cover;
+  position: relative;
+}
+
 .card_rank, .card_suit {
   position: absolute;
   top: 10px;
