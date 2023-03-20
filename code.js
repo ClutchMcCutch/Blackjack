@@ -4,6 +4,14 @@ let balance = 500;
 let action = {}; // storing functions in an object
 const suits = ["\u2660", "\u2663", "\u2665", "\u2666"];
 const ranks = ["A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"];
+let betamount = 0;
+
+user.updateBalance = function(){
+    document.getElementById("balance-total").innerHTML = ''
+    let node = document.createTextNode(`$${balance}`);
+    document.getElementById("balance-total").appendChild(node);
+}
+user.updateBalance();
 
 user.drawCard = function(x){
     if (!x){x = 1}
@@ -76,17 +84,22 @@ user.checkWin = function(){
             buttons[i].style.visibility = "hidden";
         }
         winText.style.display = "block";
+        balance += betamount*2;
+        user.updateBalance();
     }
 }
 dealer.checkWin = function(){
-    if (dealer.value > 21 || (dealer.value < user.value && dealer.value > 17)){
+    if (dealer.value > 21 || (dealer.value < user.value && dealer.value >= 17)){
         let buttons = document.getElementsByClassName("action")
         let winText = document.querySelector("#playerResult1")
         for (let i = 0; i < buttons.length; i++){
             buttons[i].style.visibility = "hidden";
         }
         winText.style.display = "block";
-    } else if ((dealer.value < 21 && dealer.value > 17) && dealer.value > user.value){
+        console.log(balance + betamount*2)
+        balance += betamount*2;
+        user.updateBalance();
+    } else if (((dealer.value < 21 && dealer.value > 17) && dealer.value > user.value) || dealer.value == 21){
         let buttons = document.getElementsByClassName("action")
         let loseText = document.querySelector("#playerResult2")
         for (let i = 0; i < buttons.length; i++){
@@ -125,6 +138,9 @@ function startGame(bet){
         console.log("Not enough money!");
         return;
     }
+    betamount = bet
+    balance -= bet
+    user.updateBalance();
     let buttons = document.getElementsByClassName("action");
     let button = document.getElementById('betbutton');
     let input = document.getElementById('betvalue')
@@ -143,6 +159,9 @@ function restartGame(bet){
         console.log("Not enough money!");
         return;
     }
+    betamount = bet
+    balance -= bet
+    user.updateBalance();
     let buttons = document.getElementsByClassName("action");
     let button = document.getElementById('betbutton');
     let input = document.getElementById('betvalue')
@@ -194,6 +213,7 @@ action.stand = function(){
 }
 action.dd = function(betvalue){
     betvalue *= 2;
+    betamount = betvalue;
     action.hit();
     action.stand();
 }
