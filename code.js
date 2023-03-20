@@ -138,6 +138,40 @@ function startGame(bet){
     console.log(user, dealer)
 }
 
+function restartGame(bet){
+    if (balance < bet){
+        console.log("Not enough money!");
+        return;
+    }
+    let buttons = document.getElementsByClassName("action");
+    let button = document.getElementById('betbutton');
+    let input = document.getElementById('betvalue')
+    for (let i = 0; i < buttons.length; i++){
+        buttons[i].style.visibility = "visible";
+    }
+    button.style.visibility = "hidden";
+    input.style.visibility = "hidden";
+    const userdeck = document.getElementById('userdeck');
+    while (userdeck.firstChild) {
+        userdeck.removeChild(userdeck.firstChild);
+    }
+    const dealerdeck = document.getElementById('dealerdeck');
+    while (dealerdeck.firstChild) {
+        dealerdeck.removeChild(dealerdeck.firstChild);
+    }
+    let loseText = document.querySelector("#playerResult2")
+    loseText.style.display = "none";
+    let winText = document.querySelector("#playerResult1")
+    winText.style.display = "none";
+    user.value = 0;
+    dealer.value = 0;
+    user.deck = [];
+    dealer.deck = [];
+    dealer.drawCard(1,1);
+    user.drawCard(2);
+    console.log(user, dealer)
+}
+
 action.hit = function(){
     user.drawCard();
     user.checkWin();

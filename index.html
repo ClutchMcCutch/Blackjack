@@ -24,12 +24,12 @@
     <div id="playerResult1" class="container">
       <h1 id="header">You Won!</h1>
       <p id="text">Congratulations on your victory!</p>
-      <a href="#" class="button" onclick="">Play Again</a>
+      <a href="#" class="button" onclick="restartGame(parseInt(document.getElementById('betvalue').value))">Play Again</a>
     </div>
     <div id="playerResult2" class="container">
       <h1 id="header">You Lost!</h1>
       <p id="text">Sorry, try again?</p>
-      <a href="#" class="button" onclick="">Play Again</a>
+      <a href="#" class="button" onclick="restartGame(parseInt(document.getElementById('betvalue').value))">Play Again</a>
     </div>
   </body>
   <script src="code.js"></script>
