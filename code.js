@@ -114,7 +114,9 @@ function randomCard(bool){
     clone.children[0].children[1].appendChild(node);
     node = document.createTextNode(drawnCard.value)
     clone.children[0].children[0].appendChild(node);
-    console.log(clone.children[0])
+    if (drawnCard.hidden === true){
+        clone.children[0].children[2].style.display = 'inline-block';
+    }
     return [drawnCard, clone];
 }
 
@@ -144,6 +146,12 @@ action.stand = function(){
     dealer.value += dealer.hiddenValue;
     dealer.hiddenValue = 0;
     dealer.deck[1].hidden = false;
+    let backCards = document.getElementsByClassName("back");
+    for (let i = 0; i < backCards.length; i++){
+        if (backCards[i].style.display == 'inline-block'){
+            backCards[i].style.display = 'none';
+        }
+    }
     dealer.checkWin();
     while (dealer.value < 17){
         dealer.drawCard();
