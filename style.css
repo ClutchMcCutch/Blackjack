@@ -21,6 +21,14 @@ button {
   transition: all 0.1s ease-in-out;
 }
 
+#betvalue {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+  width: 200px;
+}
+
 button:active {
   box-shadow: 0 2px rgb(0, 0, 0);
   transform: translateY(4px);
