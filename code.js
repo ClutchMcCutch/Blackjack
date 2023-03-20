@@ -98,7 +98,6 @@ dealer.checkWin = function(){
             buttons[i].style.visibility = "hidden";
         }
         winText.style.display = "block";
-        console.log(balance + betamount*2);
         balance += betamount*2;
         user.updateBalance();
         document.getElementById('betvalue').style.visibility = 'visible';
@@ -139,7 +138,6 @@ function randomCard(bool){
 
 function startGame(bet){
     if (balance < bet){
-        console.log("Not enough money!");
         return;
     }
     betamount = bet;
@@ -157,12 +155,10 @@ function startGame(bet){
 
     dealer.drawCard(1,1);
     user.drawCard(2);
-    console.log(user, dealer);
 }
 
 function restartGame(bet){
     if (balance < bet){
-        console.log("Not enough money!");
         return;
     }
     betamount = bet;
@@ -201,7 +197,6 @@ function restartGame(bet){
     dealer.hiddenValue = 0;
     dealer.drawCard(1,1);
     user.drawCard(2);
-    console.log(user, dealer);
 }
 
 action.hit = function(){
