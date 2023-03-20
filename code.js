@@ -91,7 +91,7 @@ user.checkWin = function(){
     }
 }
 dealer.checkWin = function(){
-    if (dealer.value > 21 || (dealer.value < user.value && dealer.value >= 17)){
+    if (dealer.value > 21 || (dealer.value < user.value && dealer.value >= 17) || dealer.value == user.value){
         let buttons = document.getElementsByClassName("action");
         let winText = document.querySelector("#playerResult1");
         for (let i = 0; i < buttons.length; i++){
@@ -102,7 +102,7 @@ dealer.checkWin = function(){
         balance += betamount*2;
         user.updateBalance();
         document.getElementById('betvalue').style.visibility = 'visible';
-    } else if (((dealer.value < 21 && dealer.value > 17) && dealer.value > user.value) || dealer.value == 21){
+    } else if (((dealer.value < 21 && dealer.value >= 17) && dealer.value > user.value) || dealer.value == 21){
         let buttons = document.getElementsByClassName("action");
         let loseText = document.querySelector("#playerResult2");
         for (let i = 0; i < buttons.length; i++){
