@@ -186,6 +186,7 @@ function restartGame(bet){
     dealer.value = 0;
     user.deck = [];
     dealer.deck = [];
+    dealer.hiddenValue = 0;
     dealer.drawCard(1,1);
     user.drawCard(2);
     console.log(user, dealer)
