@@ -4,13 +4,32 @@
     <link rel="stylesheet" href="style.css">
   </head>
   <body>
-    <div id="game">
-      <div id="player-hand"></div>
-      <div id="dealer-hand"></div>
+    <button class="action" id="hitbutton" type="button" onclick="action.hit()">Hit</button>
+    <button class="action" id="standbutton" type="button" onclick="action.stand()">Stand</button>
+    <button class="action" id="doublebutton" type="button" onclick="action.dd(parseInt(document.getElementById('betvalue').value))">Double</button>
+    <div id="balance-total"></div>
+    <input id="betvalue" type="number" value="0">
+    <button id="betbutton" type="button" onclick="startGame(parseInt(document.getElementById('betvalue').value))">Bet!</button>
+    <div id="userdeck">
     </div>
-    <div id="controls">
-      <button id="hit-button">Hit</button>
-      <button id="stand-button">Stand</button>
+    <div id="dealerdeck">
+    </div>
+    <template id="template">
+      <div class="card">
+        <div class="card_rank"></div>
+        <div class="card_suit"></div>
+        <div class="back"></div>
+      </div>
+    </template>
+    <div id="playerResult1" class="container">
+      <h1 id="header">You Won!</h1>
+      <p id="text">Congratulations on your victory!</p>
+      <a href="#" class="button" onclick="restartGame(parseInt(document.getElementById('betvalue').value))">Play Again</a>
+    </div>
+    <div id="playerResult2" class="container">
+      <h1 id="header">You Lost!</h1>
+      <p id="text">Sorry, try again?</p>
+      <a href="#" class="button" onclick="restartGame(parseInt(document.getElementById('betvalue').value))">Play Again</a>
     </div>
   </body>
   <script src="code.js"></script>

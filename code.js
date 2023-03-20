@@ -1,59 +1,114 @@
-let dealer = {deck:[], value:0, hiddenValue:0}
-let user = {deck:[], value:0}
+let dealer = {deck:[], value:0, hiddenValue:0};
+let user = {deck:[], value:0};
 let balance = 500;
 let action = {}; // storing functions in an object
+const suits = ["\u2660", "\u2663", "\u2665", "\u2666"];
+const ranks = ["A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"];
+let betamount = 0;
+
+user.updateBalance = function(){
+    document.getElementById("balance-total").innerHTML = '';
+    let node = document.createTextNode(`$${balance}`);
+    document.getElementById("balance-total").appendChild(node);
+}
+user.updateBalance();
 
 user.drawCard = function(x){
     if (!x){x = 1}
     for (let i = 0; i < x; i++){
         let newCard = randomCard();
-        if (newCard.value == "A"){
+        if (newCard[0].value == "A"){
             if (user.value + 11 > 21){
                 user.value += 1;
             } else {
                 user.value += 11;
             }
-        } else if (isNaN(parseInt(newCard.value)) === true){
+        } else if (isNaN(parseInt(newCard[0].value)) === true){
             user.value += 10;
         } else {
-            user.value += parseInt(newCard.value);
+            user.value += parseInt(newCard[0].value);
         }
-        user.deck.push(newCard);
+        user.deck.push(newCard[0]);
+        document.getElementById("userdeck").appendChild(newCard[1].children[0]);
     }
 }
-
 dealer.drawCard = function(cards, hiddenCards){
     if (!cards){cards = 1}
     if (!hiddenCards){hiddenCards = 0}
     for (let i = 0; i < cards; i++){
         let newCard = randomCard();
-        if (newCard.value == "A"){
+        if (newCard[0].value == "A"){
             if (dealer.value + 11 > 21){
                 dealer.value += 1;
             } else {
                 dealer.value += 11;
             }
-        } else if (isNaN(parseInt(newCard.value)) === true){
+        } else if (isNaN(parseInt(newCard[0].value)) === true){
             dealer.value += 10;
         } else {
-            dealer.value += parseInt(newCard.value);
+            dealer.value += parseInt(newCard[0].value);
         }
-        dealer.deck.push(newCard);
+        dealer.deck.push(newCard[0]);
+        document.getElementById("dealerdeck").appendChild(newCard[1].children[0]);
     }
     for (let i = 0; i < hiddenCards; i++){
         let newCard = randomCard(true);
-        if (newCard.value == "A"){
+        if (newCard[0].value == "A"){
             if (dealer.value + 11 > 21){
                 dealer.hiddenValue += 1;
             } else {
                 dealer.hiddenValue += 11;
             }
-        } else if (isNaN(parseInt(newCard.value)) === true){
+        } else if (isNaN(parseInt(newCard[0].value)) === true){
             dealer.hiddenValue += 10;
         } else {
-            dealer.hiddenValue += parseInt(newCard.value);
+            dealer.hiddenValue += parseInt(newCard[0].value);
         }
-        dealer.deck.push(newCard);
+        dealer.deck.push(newCard[0]);
+        document.getElementById("dealerdeck").appendChild(newCard[1].children[0]);
+    }
+}
+
+user.checkWin = function(){
+    if (user.value > 21){
+        let buttons = document.getElementsByClassName("action");
+        let loseText = document.querySelector("#playerResult2");
+        for (let i = 0; i < buttons.length; i++){
+            buttons[i].style.visibility = "hidden";
+        }
+        loseText.style.display = "block";
+        document.getElementById('betvalue').style.visibility = 'visible';
+    } else if (user.value == 21){
+        let buttons = document.getElementsByClassName("action");
+        let winText = document.querySelector("#playerResult1");
+        for (let i = 0; i < buttons.length; i++){
+            buttons[i].style.visibility = "hidden";
+        }
+        winText.style.display = "block";
+        balance += betamount*2;
+        user.updateBalance();
+        document.getElementById('betvalue').style.visibility = 'visible';
+    }
+}
+dealer.checkWin = function(){
+    if (dealer.value > 21 || (dealer.value < user.value && dealer.value >= 17) || dealer.value == user.value){
+        let buttons = document.getElementsByClassName("action");
+        let winText = document.querySelector("#playerResult1");
+        for (let i = 0; i < buttons.length; i++){
+            buttons[i].style.visibility = "hidden";
+        }
+        winText.style.display = "block";
+        balance += betamount*2;
+        user.updateBalance();
+        document.getElementById('betvalue').style.visibility = 'visible';
+    } else if (((dealer.value < 21 && dealer.value >= 17) && dealer.value > user.value) || dealer.value == 21){
+        let buttons = document.getElementsByClassName("action");
+        let loseText = document.querySelector("#playerResult2");
+        for (let i = 0; i < buttons.length; i++){
+            buttons[i].style.visibility = "hidden";
+        }
+        loseText.style.display = "block";
+        document.getElementById('betvalue').style.visibility = 'visible';
     }
 }
 
@@ -63,29 +118,88 @@ function random(min, max){
 
 function randomCard(bool){
     let values = ["A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"];
-    let types = ["S", "H", "D", "C"];
+    let types = ["\u2660", "\u2663", "\u2665", "\u2666"];
+    let template = document.querySelector('#template');
+    let clone = template.content.cloneNode(true);
     if (!bool){
         bool = false;
     }
 
     let drawnCard = {value:values[random(0, values.length-1)], type:types[random(0, types.length-1)], hidden:bool};
-    return drawnCard;
+    let node = document.createTextNode(drawnCard.type);
+    clone.children[0].children[1].appendChild(node);
+    node = document.createTextNode(drawnCard.value)
+    clone.children[0].children[0].appendChild(node);
+    if (drawnCard.hidden === true){
+        clone.children[0].children[2].style.display = 'inline-block';
+    }
+    return [drawnCard, clone];
 }
 
 function startGame(bet){
     if (balance < bet){
-        console.log("Not enough money!");
         return;
     }
+    betamount = bet;
+    balance -= bet;
+    user.updateBalance();
+
+    let buttons = document.getElementsByClassName("action");
+    let button = document.getElementById('betbutton');
+    let input = document.getElementById('betvalue');
+    for (let i = 0; i < buttons.length; i++){
+        buttons[i].style.visibility = "visible";
+    }
+    button.style.visibility = "hidden";
+    input.style.visibility = "hidden";
+
+    dealer.drawCard(1,1);
+    user.drawCard(2);
+}
+
+function restartGame(bet){
+    if (balance < bet){
+        return;
+    }
+    betamount = bet;
+    balance -= bet;
+    user.updateBalance();
+
+    let buttons = document.getElementsByClassName("action");
+    let button = document.getElementById('betbutton');
+    let input = document.getElementById('betvalue');
+
+    for (let i = 0; i < buttons.length; i++){
+        buttons[i].style.visibility = "visible";
+    }
+    button.style.visibility = "hidden";
+    input.style.visibility = "hidden";
+
+    const userdeck = document.getElementById('userdeck');
+    while (userdeck.firstChild) {
+        userdeck.removeChild(userdeck.firstChild);
+    }
+
+    const dealerdeck = document.getElementById('dealerdeck');
+    while (dealerdeck.firstChild) {
+        dealerdeck.removeChild(dealerdeck.firstChild);
+    }
+
+    let loseText = document.querySelector("#playerResult2");
+    loseText.style.display = "none";
+    let winText = document.querySelector("#playerResult1");
+    winText.style.display = "none";
+
+    user.value = 0;
+    dealer.value = 0;
+    user.deck = [];
+    dealer.deck = [];
+    dealer.hiddenValue = 0;
     dealer.drawCard(1,1);
     user.drawCard(2);
 }
 
 action.hit = function(){
-<<<<<<< Updated upstream
-    user.drawCard()
-    if (user.value > 21){
-=======
     user.drawCard();
     user.checkWin();
 }
@@ -93,30 +207,22 @@ action.stand = function(){
     dealer.value += dealer.hiddenValue;
     dealer.hiddenValue = 0;
     dealer.deck[1].hidden = false;
+    let backCards = document.getElementsByClassName("back");
+    for (let i = 0; i < backCards.length; i++){
+        if (backCards[i].style.display == 'inline-block'){
+            backCards[i].style.display = 'none';
+        }
+    }
     dealer.checkWin();
     while (dealer.value < 17){
         dealer.drawCard();
         dealer.checkWin();
     }
-    if (dealer.value > user.value){
->>>>>>> Stashed changes
-        // lose
-    } else if (user.value == 21){
-        // win
-    }
 }
-<<<<<<< Updated upstream
-action.stand = function(){}
-action.dd = function(){}
-=======
 action.dd = function(betvalue){
     betvalue *= 2;
+    betamount = betvalue;
     action.hit();
     action.stand();
+    dealer.checkWin();
 }
-
-action.split = function(){}
->>>>>>> Stashed changes
-
-startGame();
-console.log(dealer, user, action)

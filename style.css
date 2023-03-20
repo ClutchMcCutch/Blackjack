@@ -1,14 +1,158 @@
-#game {
-    display: flex;
-  }
-  
-  #player-hand, #dealer-hand {
-    display: flex;
-    flex-wrap: wrap;
-  }
-  
-  .card {
-    width: 70px;
-    height: 100px;
-    border: 1px solid black;
-  }
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@700&display=swap');
+ body {
+  background-image: url("images/blackjack_background.png");
+  background-size: cover;
+  height: 100%;
+  width: 100%;
+ }
+button {
+  background-color: #2ecc71;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 4px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  transition: all 0.1s ease-in-out;
+}
+
+#betvalue {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+  width: 200px;
+}
+
+button:active {
+  box-shadow: 0 2px rgb(0, 0, 0);
+  transform: translateY(4px);
+}
+
+#hitbutton:hover {
+  background-color: rgb(77, 173, 21);
+}
+
+#standbutton:hover {
+  background-color: rgb(243, 6, 6);
+}
+
+#doublebutton:hover {
+  background-color: rgb(0, 204, 255);
+}
+
+#splitbutton:hover {
+  background-color: rgb(255, 0, 242);
+}
+
+#betbutton {
+  visibility: visible;
+}
+
+.card {
+  display: inline-block;
+  width: 100px;
+  height: 140px;
+  border: 1px solid black;
+  border-radius: 5px;
+  background-color: white;
+  position: relative;
+}
+
+.back {
+  display: none;
+  width: 100px;
+  height: 140px;
+  border: 1px solid black;
+  border-radius: 5px;
+  background-image: url('https://media.discordapp.net/attachments/901167623595769897/1087177400888070234/goldback_a17dec99-72da-4a44-a1df-9352fb3c8afa_1024x.png?width=285&height=401');
+  background-size: cover;
+  position: relative;
+}
+
+.card_rank, .card_suit {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  font-size: 24px;
+}
+
+.card_suit {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 36px;
+}
+
+#balance-total {
+  font-size: 32px;
+  font-weight: bold;
+  color: #fff;
+  background-color: #4CAF50;
+  padding: 16px;
+  border-radius: 4px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  transition: background-color 0.3s ease;
+  position: absolute;
+  top: 16px;
+  right: 16px;
+}
+
+#balance-total:hover {
+  background-color: #3E8E41;
+}
+
+.action{
+  visibility: hidden;
+}
+
+#playerResult1 {
+  background-color: #fff;
+  padding: 40px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  display: none;
+}
+
+#playerResult2 {
+  background-color: #fff;
+  padding: 40px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  display: none;
+}
+
+#header {
+  font-size: 36px;
+  color: #008000;
+  margin-bottom: 20px;
+}
+
+#text {
+  font-size: 24px;
+  color: #555;
+  margin-bottom: 40px;
+}
+
+.button {
+  display: inline-block;
+  padding: 10px 20px;
+  border-radius: 5px;
+  background-color: #008000;
+  color: #fff;
+  text-decoration: none;
+  font-size: 18px;
+  transition: all 0.3s ease;
+}
+
+.button:hover {
+  background-color: #006400;
+}
